@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment.prod';
 declare var $: any;
 
 @Component({
@@ -8,12 +9,13 @@ declare var $: any;
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+  baseUrl = environment.baseUrl;
   ngOnDestroy(): void {
     document.body.className = '';
   }
 
   constructor(private http: HttpClient) {
-    this.http.get(`/roles`, {responseType: 'text'}).subscribe(data => {
+    this.http.get(`${this.baseUrl}/roles`, {responseType: 'text'}).subscribe(data => {
       console.log(data);
     });
   }
