@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 declare var $: any;
 
 @Component({
@@ -11,7 +12,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     document.body.className = '';
   }
 
-  constructor() { }
+  constructor(private http: HttpClient) {
+    this.http.get(`/roles`, {responseType: 'text'}).subscribe(data => {
+      console.log(data);
+    });
+  }
 
   ngOnInit() {
     window.dispatchEvent(new Event('resize'));
